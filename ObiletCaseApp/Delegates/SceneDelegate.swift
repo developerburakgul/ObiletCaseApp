@@ -19,7 +19,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = ViewController()
+        let networkManager : NetworkManaging = AFNetworkManager()
+        let productService : ProductServicing = ProductService(networkManager: networkManager)
+        let homeViewModel = HomeViewModel(productService: productService)
+        let homeViewController = HomeViewController(viewModel: homeViewModel)
+        let navigationController = UINavigationController(rootViewController: homeViewController)
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 
