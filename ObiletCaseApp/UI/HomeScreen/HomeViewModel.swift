@@ -17,7 +17,7 @@ protocol HomeViewModelInterface {
     
 }
 
-class HomeViewModel {
+final class HomeViewModel {
     weak var view : HomeViewControllerInterface?
     private let productService : ProductServicing
     private var products : [Product] = []
@@ -40,9 +40,10 @@ class HomeViewModel {
             case .success(let data):
                 self.products = data
                 self.showProducts = data
+                self.view?.hideNoConnection()
                 self.view?.reloadData()
             case .failure(let error):
-                dump(error)
+                self.view?.showNoConnection()
             }
         }
     }
@@ -57,7 +58,6 @@ class HomeViewModel {
             switch result {
             case .success(let data):
                 self.categories = data
-                //                self.output?.updateFilterButtons(with: data)
             case .failure(let failure):
                 fatalError("errorr")
             }
@@ -69,29 +69,27 @@ class HomeViewModel {
         return categories
     }
     
-    func filterProductsBy(_ category :String) {
-        showProducts = products.filter({ product in
-            return product.category == category
-        })
-        
-    }
     
+    
+    /// Filters the product list based on the search text.
+    /// Category filter requires an exact match, while title and description filters check for keyword containment.
+    /// - Parameter text: User's searchText
     func filterProductsWith(_ text : String) {
-        // This function should edited
+        // If the search text is empty, show all products
         if text.isEmpty {
             showProducts = products
             return
         }
-        
-        
+        // Split the search text into keywords for filtering
         let keywords = text.lowercased().split(separator: " ")
         
         var tempProductArray: [Product] = []
         
-        // Önce category'de eşleşenleri ekle
+        // Step 1: Filter products by exact match in the category
         let categoryMatches = products.filter { product in
             for keyword in keywords {
-                if product.category.lowercased().contains(keyword) {
+                // Check for exact match between product category and keyword
+                if product.category.lowercased() == keyword {
                     return true
                 }
             }
@@ -99,12 +97,14 @@ class HomeViewModel {
         }
         tempProductArray.append(contentsOf: categoryMatches)
         
-        // Sonra title'da eşleşenlerden category'de bulunmayanları ekle
+        // Step 2: Filter products by keyword containment in the title
         let titleMatches = products.filter { product in
+            // Exclude products that are already matched in the category filter
             if categoryMatches.contains(where: { $0 == product }) {
                 return false
             }
             for keyword in keywords {
+                // Check if the title contains any of the keywords
                 if product.title.lowercased().contains(keyword) {
                     return true
                 }
@@ -112,13 +112,15 @@ class HomeViewModel {
             return false
         }
         tempProductArray.append(contentsOf: titleMatches)
-        
-        // En son description'da eşleşenlerden category veya title'da bulunmayanları ekle
+      
+        // Step 3: Filter products by keyword containment in the description
         let descriptionMatches = products.filter { product in
+            // Exclude products that are already matched in the category or title filters
             if categoryMatches.contains(where: { $0 == product }) || titleMatches.contains(where: { $0 == product }) {
                 return false
             }
             for keyword in keywords {
+                // Check if the description contains any of the keywords
                 if product.description.lowercased().contains(keyword) {
                     return true
                 }
@@ -127,10 +129,10 @@ class HomeViewModel {
         }
         tempProductArray.append(contentsOf: descriptionMatches)
         
+        // Update the showProducts array with the filtered results
         showProducts = tempProductArray
-        
-        
     }
+
 
 }
 

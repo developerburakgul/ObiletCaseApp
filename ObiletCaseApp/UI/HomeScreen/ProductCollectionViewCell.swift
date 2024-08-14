@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 
-class ProductCollectionViewCell: UICollectionViewCell {
+final class ProductCollectionViewCell: UICollectionViewCell {
     //MARK: - Identifier
     static let identifier = "ProductCollectionViewCell"
     

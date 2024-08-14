@@ -14,7 +14,7 @@ protocol DetailViewControllerInterface : AnyObject{
     func setupNavigationBar()
 }
 
-class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController {
     
     private let viewModel : DetailViewModel
     

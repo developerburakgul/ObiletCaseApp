@@ -14,10 +14,12 @@ protocol HomeViewControllerInterface : AnyObject {
     func reloadData()
     func setup()
     func setupNavigationBar()
+    func showNoConnection()
+    func hideNoConnection()
 }
 
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
     
     private var viewModel : HomeViewModel
     
@@ -34,6 +36,13 @@ class HomeViewController: UIViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
         return searchController
+    }()
+    private var noConnectionImageView : UIImageView = {
+       let noConnectionImageView = UIImageView()
+        noConnectionImageView.image = UIImage(systemName: "wifi.slash")
+        noConnectionImageView.isHidden = false
+        noConnectionImageView.tintColor = .systemRed
+        return noConnectionImageView
     }()
     
     //MARK: - Init Functions
@@ -63,6 +72,18 @@ class HomeViewController: UIViewController {
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
             make.leading.trailing.equalToSuperview()
+        }
+    }
+    
+    private func setupNoConnectionImageView(){
+        var minSize = min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
+        view.addSubview(noConnectionImageView)
+        noConnectionImageView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.width.equalTo(minSize * 0.5)
+            make.height.equalTo(noConnectionImageView.snp.width)
+            
+            
         }
     }
     private func setupDelegates()  {
@@ -134,6 +155,7 @@ extension HomeViewController : HomeViewControllerInterface {
         setupNavigationBar()
         setupCollectionView()
         setupDelegates()
+        setupNoConnectionImageView()
         collectionView.register(ProductCollectionViewCell.self, forCellWithReuseIdentifier: ProductCollectionViewCell.identifier)
         view.backgroundColor = .systemBackground
     }
@@ -143,6 +165,14 @@ extension HomeViewController : HomeViewControllerInterface {
         self.navigationItem.searchController = searchController
         self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.label]
         self.navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.label]
+    }
+    
+    func showNoConnection() {
+        noConnectionImageView.isHidden = false
+    }
+    
+    func hideNoConnection() {
+        noConnectionImageView.isHidden = true
     }
 }
 #Preview(""){

@@ -15,7 +15,7 @@ protocol DetailViewModelInterface {
 }
 
 
-class DetailViewModel {
+final class DetailViewModel {
     private var product : Product
     weak var view : DetailViewControllerInterface?
     init(product: Product) {
