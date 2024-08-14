@@ -7,16 +7,19 @@
 
 import Foundation
 
-protocol HomeViewModelOutput :AnyObject {
-    func collectionViewReloadData()
+
+//MARK: - HomeViewModelInterface
+protocol HomeViewModelInterface {
+    func viewDidLoad()
+    func viewWillAppear()
+    func textDidChangeWith(_ searchText : String)
+    func searchBarCancelButtonClicked()
+    
 }
 
 class HomeViewModel {
-    weak var output : HomeViewModelOutput?
-    
+    weak var view : HomeViewControllerInterface?
     private let productService : ProductServicing
-    
-    
     private var products : [Product] = []
     private var categories: [String] = []
     private var showProducts : [Product] = []
@@ -25,7 +28,7 @@ class HomeViewModel {
     var countOfProducts : Int {
         showProducts.count
     }
-    
+    //MARK: - Init
     init(productService: ProductServicing) {
         self.productService = productService
     }
@@ -37,7 +40,7 @@ class HomeViewModel {
             case .success(let data):
                 self.products = data
                 self.showProducts = data
-                self.output?.collectionViewReloadData()
+                self.view?.reloadData()
             case .failure(let error):
                 dump(error)
             }
@@ -74,11 +77,9 @@ class HomeViewModel {
     }
     
     func filterProductsWith(_ text : String) {
-        
-        
+        // This function should edited
         if text.isEmpty {
             showProducts = products
-            output?.collectionViewReloadData()
             return
         }
         
@@ -128,13 +129,32 @@ class HomeViewModel {
         
         showProducts = tempProductArray
         
-        output?.collectionViewReloadData()
+        
+    }
+
+}
+
+
+
+//MARK: - HomeViewModelInterface Implementation
+extension HomeViewModel : HomeViewModelInterface {
+    func viewDidLoad() {
+        view?.setup()
+        fetchProducts()
     }
     
-     func searchBarCancelButtonClicked() {
+    func viewWillAppear() {
+        view?.setupNavigationBar()
+    }
+    
+    func textDidChangeWith(_ searchText: String) {
+        self.filterProductsWith(searchText)
+        view?.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked() {
         showProducts = products
-        output?.collectionViewReloadData()
+        view?.reloadData()
     }
-    
     
 }

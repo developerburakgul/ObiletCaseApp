@@ -7,21 +7,36 @@
 
 import Foundation
 
-
-protocol DetailViewModelOutput : AnyObject{
-    func updateViewWith(_ product : Product)
+//MARK: - DetailViewModelInterface
+protocol DetailViewModelInterface {
+    func viewDidLoad()
+    func viewWillAppear()
+    func updateView()
 }
+
 
 class DetailViewModel {
     private var product : Product
-    weak var output : DetailViewModelOutput?
-    
-    
+    weak var view : DetailViewControllerInterface?
     init(product: Product) {
         self.product = product
     }
+}
+
+//MARK: -  DetailViewModelInterface Implementation
+extension DetailViewModel : DetailViewModelInterface {
+    func viewDidLoad() {
+        view?.setup()
+        updateView()
+    }
+    
+    func viewWillAppear() {
+        view?.setupNavigationBar()
+    }
     
     func updateView() {
-        output?.updateViewWith(product)
+        view?.updateViewWith(product)
     }
+    
+    
 }

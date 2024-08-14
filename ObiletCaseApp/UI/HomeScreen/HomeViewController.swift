@@ -8,9 +8,16 @@
 import UIKit
 import SnapKit
 
+
+//MARK: - HomeViewControllerInterface
+protocol HomeViewControllerInterface : AnyObject {
+    func reloadData()
+    func setup()
+    func setupNavigationBar()
+}
+
+
 class HomeViewController: UIViewController {
-    
-    
     
     private var viewModel : HomeViewModel
     
@@ -26,20 +33,15 @@ class HomeViewController: UIViewController {
         let searchController : UISearchController = UISearchController()
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
-        
         return searchController
     }()
-
-
-
     
     //MARK: - Init Functions
     init(viewModel : HomeViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        self.viewModel.output = self
+        self.viewModel.view = self
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -47,38 +49,14 @@ class HomeViewController: UIViewController {
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
-        collectionView.register(ProductCollectionViewCell.self, forCellWithReuseIdentifier: ProductCollectionViewCell.identifier)
-        viewModel.fetchProducts()
-        viewModel.fetchCategories()
-        view.backgroundColor = .systemBackground
-       
+        viewModel.viewDidLoad()
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupNavigationBar()
+        viewModel.viewWillAppear()
     }
     
     //MARK: - Setup Functions
-    private func setup()  {
-        setupNavigationBar()
-        setupCollectionView()
-        setupDelegates()
-    }
-
-    private func setupNavigationBar(){
-        self.navigationItem.title = "Home Screen"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.searchController = searchController
-        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.label]
-        self.navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.label]
-        
-        
-    }
-    
-
-    
     private func setupCollectionView() {
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
@@ -87,33 +65,24 @@ class HomeViewController: UIViewController {
             make.leading.trailing.equalToSuperview()
         }
     }
-    
     private func setupDelegates()  {
         collectionView.delegate = self
         collectionView.dataSource = self
         searchController.searchBar.delegate = self
     }
-    
-
-    
-
-    
-    
-    
-    
 }
 
+//MARK: - UICollectionViewDelegate
 extension HomeViewController : UICollectionViewDelegate {
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let product = viewModel.getProduct(indexPath: indexPath)
         let detailViewModel = DetailViewModel(product: product)
         let detailViewControlelr = DetailViewController(viewModel: detailViewModel)
         self.navigationItem.backButtonDisplayMode = .generic
         self.navigationController?.pushViewController(detailViewControlelr, animated: true)
-        
     }
 }
+//MARK: - UICollectionViewDataSource
 extension HomeViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.countOfProducts
@@ -127,53 +96,55 @@ extension HomeViewController : UICollectionViewDataSource {
         cell.configure(with: viewModel.getProduct(indexPath: indexPath))
         return cell
     }
-    
-    
-    
-    
-    
-    
 }
 
+//MARK: - UICollectionViewDelegateFlowLayout
 extension HomeViewController : UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let padding: CGFloat = 32
-        
         let minimumSpacing: CGFloat = 10
         let availableWidth = view.frame.width - padding - minimumSpacing
         let itemWidth = availableWidth / 2
-        
         return CGSize(width: itemWidth, height: itemWidth)
     }
     
 }
 
 
-
+//MARK: - UISearchBarDelegate
 extension HomeViewController : UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.filterProductsWith(searchText)
+        viewModel.textDidChangeWith(searchText)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         viewModel.searchBarCancelButtonClicked()
     }
-    
-    
 }
 
-extension HomeViewController : HomeViewModelOutput {
-    func collectionViewReloadData() {
+//MARK: - HomeViewControllerInterface Implementation
+extension HomeViewController : HomeViewControllerInterface {
+    func reloadData() {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
     }
+    func setup()  {
+        setupNavigationBar()
+        setupCollectionView()
+        setupDelegates()
+        collectionView.register(ProductCollectionViewCell.self, forCellWithReuseIdentifier: ProductCollectionViewCell.identifier)
+        view.backgroundColor = .systemBackground
+    }
+    func setupNavigationBar(){
+        self.navigationItem.title = "Home Screen"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.searchController = searchController
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.label]
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.label]
+    }
 }
-
-
-
-
 #Preview(""){
     
     UINavigationController(rootViewController: HomeViewController(viewModel: HomeViewModel(productService: ProductService(networkManager: AFNetworkManager()))))

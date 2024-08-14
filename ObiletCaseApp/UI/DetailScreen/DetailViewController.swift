@@ -7,45 +7,52 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+//MARK: - DetailViewControllerInterface
+protocol DetailViewControllerInterface : AnyObject{
+    func setup()
+    func updateViewWith(_ product : Product)
+    func setupNavigationBar()
+}
 
+class DetailViewController: UIViewController {
+    
     private let viewModel : DetailViewModel
     
     //MARK: - UI Components
     private let scrollView : UIScrollView = {
         let scrollView : UIScrollView = UIScrollView()
-//        scrollView.backgroundColor = .cyan
+        //        scrollView.backgroundColor = .cyan
         scrollView.backgroundColor = .systemBackground
         return scrollView
     }()
     private let contentView : UIView = {
         let contentView : UIView = UIView()
-//        contentView.backgroundColor = .yellow
+        //        contentView.backgroundColor = .yellow
         contentView.backgroundColor = .systemBackground
         return contentView
     }()
     private var imageView : UIImageView = {
-       let imageview = UIImageView()
+        let imageview = UIImageView()
         imageview.image = UIImage(systemName: "star")
-//        imageview.backgroundColor = .red
+        //        imageview.backgroundColor = .red
         imageview.backgroundColor = .systemBackground
         imageview.contentMode = .scaleAspectFit
         return imageview
     }()
     private var titleLabel : UILabel = {
-       let titleLabel = UILabel()
+        let titleLabel = UILabel()
         titleLabel.text = "Title"
         titleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
-//        titleLabel.backgroundColor = .green
+        //        titleLabel.backgroundColor = .green
         titleLabel.textColor = .label
         titleLabel.numberOfLines = 0
         return titleLabel
     }()
     private var descriptionLabel : UILabel = {
-       let descriptionLabel = UILabel()
+        let descriptionLabel = UILabel()
         descriptionLabel.text = "Description"
         descriptionLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-//        descriptionLabel.backgroundColor = .systemPink
+        //        descriptionLabel.backgroundColor = .systemPink
         descriptionLabel.textColor = .secondaryLabel
         descriptionLabel.numberOfLines = 0
         return descriptionLabel
@@ -53,50 +60,50 @@ class DetailViewController: UIViewController {
     private let starImageView : UIImageView = {
         let starImageView = UIImageView(image: UIImage(systemName: "star.fill"))
         starImageView.contentMode = .scaleAspectFit
-//        starImageView.backgroundColor = .lightGray
+        //        starImageView.backgroundColor = .lightGray
         starImageView.tintColor = .systemYellow
         return starImageView
     }()
     private let rateLabel : UILabel = {
-       let rateLabel = UILabel()
+        let rateLabel = UILabel()
         rateLabel.text = "4.7"
         rateLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-//        rateLabel.backgroundColor = .red
+        //        rateLabel.backgroundColor = .red
         return rateLabel
-    }() 
+    }()
     private let countImageView : UIImageView = {
         let countImageView = UIImageView(image: UIImage(systemName: "cart"))
         countImageView.contentMode = .scaleAspectFit
-//        countImageView.backgroundColor = .systemPink
+        //        countImageView.backgroundColor = .systemPink
         return countImageView
     }()
     private let countLabel : UILabel = {
-       let countLabel = UILabel()
+        let countLabel = UILabel()
         countLabel.text = "50"
         countLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-//        countLabel.backgroundColor = .gray
+        //        countLabel.backgroundColor = .gray
         return countLabel
     }()
     private let priceImageView : UIImageView = {
         let priceImageView = UIImageView(image: UIImage(systemName: "dollarsign.circle.fill"))
         priceImageView.contentMode = .scaleAspectFit
-//        priceImageView.backgroundColor = .red
+        //        priceImageView.backgroundColor = .red
         priceImageView.tintColor = .systemGreen
         return priceImageView
     }()
     private let priceLabel : UILabel = {
-       let priceLabel = UILabel()
+        let priceLabel = UILabel()
         priceLabel.text = "50"
         priceLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-//        priceLabel.backgroundColor = .orange
+        //        priceLabel.backgroundColor = .orange
         return priceLabel
     }()
- 
-    //MARK: - Init Functions
     
+    //MARK: - Init Functions
     init(viewModel: DetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        self.viewModel.view = self
     }
     
     required init?(coder: NSCoder) {
@@ -106,52 +113,28 @@ class DetailViewController: UIViewController {
     //MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
-        self.viewModel.output = self
-        viewModel.updateView()
+        viewModel.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupNavigationBar()
-    }
-
-    //MARK: - Setup
-    private func setup() {
-        self.view.backgroundColor = .systemBackground
-        setupNavigationBar()
-        setupScrollView()
-        setupContentView()
-        setupImageView()
-        setupTitleLabel()
-        setupDescriptionLabel()
-        setupStarImageView()
-        setupRateLabel()
-        setupCountImageView()
-        setupCountLabel()
-        setupPriceImageView()
-        setupPriceLabel()
+        viewModel.viewWillAppear()
     }
     
-    private func setupNavigationBar() {
-        self.navigationItem.title = "Detail Screen"
-        self.navigationController?.navigationBar.prefersLargeTitles = false
-        
-    }
-    
+    //MARK: - Setup Functions
     private func setupScrollView() {
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-    } 
+    }
     private func setupContentView() {
         scrollView.addSubview(contentView)
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.width.equalToSuperview()
         }
-    } 
+    }
     private func setupImageView() {
         contentView.addSubview(imageView)
         imageView.snp.makeConstraints { make in
@@ -175,7 +158,7 @@ class DetailViewController: UIViewController {
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview().inset(16)
-//            make.bottom.equalToSuperview().offset(-16)
+            //            make.bottom.equalToSuperview().offset(-16)
         }
     }
     
@@ -189,7 +172,7 @@ class DetailViewController: UIViewController {
             make.bottom.equalToSuperview().offset(-16)
         }
         
-    } 
+    }
     private func setupRateLabel() {
         contentView.addSubview(rateLabel)
         rateLabel.snp.makeConstraints { make in
@@ -199,7 +182,7 @@ class DetailViewController: UIViewController {
             make.width.equalTo(starImageView.snp.width).multipliedBy(1.5)
         }
         
-    } 
+    }
     private func setupCountImageView() {
         contentView.addSubview(countImageView)
         countImageView.snp.makeConstraints { make in
@@ -236,19 +219,34 @@ class DetailViewController: UIViewController {
             make.width.equalTo(countLabel.snp.width).multipliedBy(2)
         }
     }
-
-    
-
     
 }
 
-extension DetailViewController : DetailViewModelOutput {
+//MARK: - DetailViewControllerInterface Implementation
+extension DetailViewController : DetailViewControllerInterface {
+    
+    func setup() {
+        self.view.backgroundColor = .systemBackground
+        setupNavigationBar()
+        setupScrollView()
+        setupContentView()
+        setupImageView()
+        setupTitleLabel()
+        setupDescriptionLabel()
+        setupStarImageView()
+        setupRateLabel()
+        setupCountImageView()
+        setupCountLabel()
+        setupPriceImageView()
+        setupPriceLabel()
+    }
+    
     func updateViewWith(_ product: Product) {
         self.titleLabel.text = product.title
         self.descriptionLabel.text = product.description
         self.rateLabel.text =  "\(product.rating.rate)"
         self.countLabel.text =  "\(product.rating.count)"
-        self.priceLabel.text = "\(product.price)"
+        self.priceLabel.text = product.price.toInt?.toString ?? product.price.toString
         
         
         imageView.kf.indicatorType = .activity
@@ -269,10 +267,17 @@ extension DetailViewController : DetailViewModelOutput {
             }
     }
     
-    
-    
-    
+    func setupNavigationBar() {
+        self.navigationItem.title = "Detail Screen"
+        self.navigationController?.navigationBar.prefersLargeTitles = false
+    }
 }
+
+
+
+
+
+
 #Preview(""){
     UINavigationController(rootViewController: DetailViewController(viewModel: DetailViewModel(product: Product(id: 2, title: "Burak is  ", price: 2500.00, description: "This is the description. It can be very long and will require scrolling to see the entire text.",category: "men", image: "https://avatars.githubusercontent.com/u/83167665?s=400&u=09405fb9f0a95b97b27778d163c19eb64bb3e95a&v=4", rating: Rating(rate: 4.7, count: 10)))))
 }
