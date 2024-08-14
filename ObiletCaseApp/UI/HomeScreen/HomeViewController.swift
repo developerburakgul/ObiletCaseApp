@@ -109,6 +109,7 @@ extension HomeViewController : UICollectionViewDelegate {
         let product = viewModel.getProduct(indexPath: indexPath)
         let detailViewModel = DetailViewModel(product: product)
         let detailViewControlelr = DetailViewController(viewModel: detailViewModel)
+        self.navigationItem.backButtonDisplayMode = .generic
         self.navigationController?.pushViewController(detailViewControlelr, animated: true)
         
     }
