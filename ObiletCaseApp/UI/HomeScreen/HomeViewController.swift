@@ -11,7 +11,7 @@ import SnapKit
 
 //MARK: - HomeViewControllerInterface
 protocol HomeViewControllerInterface : AnyObject {
-    var isDragging : Bool {get}
+    var collectionViewIsDragging : Bool {get}
     func reloadData()
     func setup()
     func setupNavigationBar()
@@ -162,7 +162,7 @@ extension HomeViewController : UISearchBarDelegate {
 
 //MARK: - HomeViewControllerInterface Implementation
 extension HomeViewController : HomeViewControllerInterface {
-    var isDragging: Bool {
+    var collectionViewIsDragging: Bool {
         self.collectionView.isDragging
     }
     

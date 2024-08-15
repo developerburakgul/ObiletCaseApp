@@ -39,11 +39,11 @@ final class HomeViewModel {
     }
     
     //MARK: - Public Functions
-
+    
     func fetchProducts() {
         
         guard !isFetching else { return } // if there is fetch operation , dont start
-                isFetching = true
+        isFetching = true
         DispatchQueue.global(qos: .background).async {
             self.productService.fetchProducts(path: Endpoint.products) { result in
                 self.isFetching = false // Reset the flag when the operation is complete
@@ -64,8 +64,8 @@ final class HomeViewModel {
                 }
             }
         }
-
-
+        
+        
     }
     
     func getProduct(indexPath : IndexPath) -> Product {
@@ -132,7 +132,7 @@ final class HomeViewModel {
             return false
         }
         tempProductArray.append(contentsOf: titleMatches)
-      
+        
         // Step 3: Filter products by keyword containment in the description
         let descriptionMatches = products.filter { product in
             // Exclude products that are already matched in the category or title filters
@@ -152,8 +152,8 @@ final class HomeViewModel {
         // Update the showProducts array with the filtered results
         showProducts = tempProductArray
     }
-
-
+    
+    
 }
 
 
@@ -180,13 +180,12 @@ extension HomeViewModel : HomeViewModelInterface {
     }
     
     func pulledDownRefreshControl() {
-        if let isDragging = view?.isDragging {
-            view?.beginRefreshing()
-            if isDragging {
-                fetchProducts()
-                view?.endRefreshing()
-            }
+        view?.beginRefreshing()
+        fetchProducts()
+        DispatchQueue.main.async {
+            self.view?.endRefreshing()
         }
+        
     }
     
 }

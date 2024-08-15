@@ -27,7 +27,23 @@
 		23C2B5FE2C6B4FAF007EEF94 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 23C2B5FD2C6B4FAF007EEF94 /* Kingfisher */; };
 		23C2B6012C6B69B7007EEF94 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2B6002C6B69B7007EEF94 /* DetailViewController.swift */; };
 		23C2B6072C6BAB19007EEF94 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2B6062C6BAB19007EEF94 /* DetailViewModel.swift */; };
+		23DEDB952C6E3DDB0076B075 /* ObiletCaseAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DEDB942C6E3DDB0076B075 /* ObiletCaseAppTests.swift */; };
+		23DEDB9E2C6E3E4B0076B075 /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DEDB9D2C6E3E4B0076B075 /* HomeViewModelTests.swift */; };
+		23DEDBA02C6E435A0076B075 /* MockHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DEDB9F2C6E435A0076B075 /* MockHomeViewController.swift */; };
+		23DEDBA42C6E44070076B075 /* MockProductService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DEDBA32C6E44070076B075 /* MockProductService.swift */; };
+		23DEDBA82C6E515E0076B075 /* Product+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DEDBA72C6E515E0076B075 /* Product+Mock.swift */; };
+		23DEDBAA2C6E525C0076B075 /* Rating+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DEDBA92C6E525C0076B075 /* Rating+Mock.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		23DEDB962C6E3DDB0076B075 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 235EA07D2C6A5B3400F80F86 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 235EA0842C6A5B3400F80F86;
+			remoteInfo = ObiletCaseApp;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		235EA0852C6A5B3400F80F86 /* ObiletCaseApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObiletCaseApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +63,13 @@
 		23A9E7522C6D060D0098D375 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		23C2B6002C6B69B7007EEF94 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		23C2B6062C6BAB19007EEF94 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		23DEDB922C6E3DDB0076B075 /* ObiletCaseAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ObiletCaseAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		23DEDB942C6E3DDB0076B075 /* ObiletCaseAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObiletCaseAppTests.swift; sourceTree = "<group>"; };
+		23DEDB9D2C6E3E4B0076B075 /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
+		23DEDB9F2C6E435A0076B075 /* MockHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHomeViewController.swift; sourceTree = "<group>"; };
+		23DEDBA32C6E44070076B075 /* MockProductService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProductService.swift; sourceTree = "<group>"; };
+		23DEDBA72C6E515E0076B075 /* Product+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Product+Mock.swift"; sourceTree = "<group>"; };
+		23DEDBA92C6E525C0076B075 /* Rating+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rating+Mock.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +85,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		23DEDB8F2C6E3DDB0076B075 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -69,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				235EA0872C6A5B3400F80F86 /* ObiletCaseApp */,
+				23DEDB932C6E3DDB0076B075 /* ObiletCaseAppTests */,
 				235EA0862C6A5B3400F80F86 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -77,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				235EA0852C6A5B3400F80F86 /* ObiletCaseApp.app */,
+				23DEDB922C6E3DDB0076B075 /* ObiletCaseAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -192,6 +224,67 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		23DEDB932C6E3DDB0076B075 /* ObiletCaseAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				23DEDBA52C6E50F50076B075 /* Helper */,
+				23DEDBA12C6E43E70076B075 /* Core */,
+				23DEDB9B2C6E3DF10076B075 /* UI */,
+				23DEDB942C6E3DDB0076B075 /* ObiletCaseAppTests.swift */,
+			);
+			path = ObiletCaseAppTests;
+			sourceTree = "<group>";
+		};
+		23DEDB9B2C6E3DF10076B075 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				23DEDB9C2C6E3DFD0076B075 /* HomeScreen */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		23DEDB9C2C6E3DFD0076B075 /* HomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				23DEDB9D2C6E3E4B0076B075 /* HomeViewModelTests.swift */,
+				23DEDB9F2C6E435A0076B075 /* MockHomeViewController.swift */,
+			);
+			path = HomeScreen;
+			sourceTree = "<group>";
+		};
+		23DEDBA12C6E43E70076B075 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				23DEDBA22C6E43EE0076B075 /* Services */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		23DEDBA22C6E43EE0076B075 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				23DEDBA32C6E44070076B075 /* MockProductService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		23DEDBA52C6E50F50076B075 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				23DEDBA62C6E51480076B075 /* Extensions */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		23DEDBA62C6E51480076B075 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				23DEDBA72C6E515E0076B075 /* Product+Mock.swift */,
+				23DEDBA92C6E525C0076B075 /* Rating+Mock.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -219,6 +312,24 @@
 			productReference = 235EA0852C6A5B3400F80F86 /* ObiletCaseApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		23DEDB912C6E3DDB0076B075 /* ObiletCaseAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 23DEDB9A2C6E3DDB0076B075 /* Build configuration list for PBXNativeTarget "ObiletCaseAppTests" */;
+			buildPhases = (
+				23DEDB8E2C6E3DDB0076B075 /* Sources */,
+				23DEDB8F2C6E3DDB0076B075 /* Frameworks */,
+				23DEDB902C6E3DDB0076B075 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				23DEDB972C6E3DDB0076B075 /* PBXTargetDependency */,
+			);
+			name = ObiletCaseAppTests;
+			productName = ObiletCaseAppTests;
+			productReference = 23DEDB922C6E3DDB0076B075 /* ObiletCaseAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -231,6 +342,10 @@
 				TargetAttributes = {
 					235EA0842C6A5B3400F80F86 = {
 						CreatedOnToolsVersion = 15.0.1;
+					};
+					23DEDB912C6E3DDB0076B075 = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = 235EA0842C6A5B3400F80F86;
 					};
 				};
 			};
@@ -253,6 +368,7 @@
 			projectRoot = "";
 			targets = (
 				235EA0842C6A5B3400F80F86 /* ObiletCaseApp */,
+				23DEDB912C6E3DDB0076B075 /* ObiletCaseAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -264,6 +380,13 @@
 			files = (
 				235EA0952C6A5B3500F80F86 /* LaunchScreen.storyboard in Resources */,
 				235EA0922C6A5B3500F80F86 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23DEDB902C6E3DDB0076B075 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,7 +413,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		23DEDB8E2C6E3DDB0076B075 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23DEDBA82C6E515E0076B075 /* Product+Mock.swift in Sources */,
+				23DEDBA02C6E435A0076B075 /* MockHomeViewController.swift in Sources */,
+				23DEDBAA2C6E525C0076B075 /* Rating+Mock.swift in Sources */,
+				23DEDB952C6E3DDB0076B075 /* ObiletCaseAppTests.swift in Sources */,
+				23DEDB9E2C6E3E4B0076B075 /* HomeViewModelTests.swift in Sources */,
+				23DEDBA42C6E44070076B075 /* MockProductService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		23DEDB972C6E3DDB0076B075 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 235EA0842C6A5B3400F80F86 /* ObiletCaseApp */;
+			targetProxy = 23DEDB962C6E3DDB0076B075 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		235EA0932C6A5B3500F80F86 /* LaunchScreen.storyboard */ = {
@@ -477,6 +621,42 @@
 			};
 			name = Release;
 		};
+		23DEDB982C6E3DDB0076B075 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZBYGRL25JU;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BurakGul.ObiletCaseAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ObiletCaseApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ObiletCaseApp";
+			};
+			name = Debug;
+		};
+		23DEDB992C6E3DDB0076B075 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZBYGRL25JU;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BurakGul.ObiletCaseAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ObiletCaseApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ObiletCaseApp";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -494,6 +674,15 @@
 			buildConfigurations = (
 				235EA09A2C6A5B3500F80F86 /* Debug */,
 				235EA09B2C6A5B3500F80F86 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		23DEDB9A2C6E3DDB0076B075 /* Build configuration list for PBXNativeTarget "ObiletCaseAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				23DEDB982C6E3DDB0076B075 /* Debug */,
+				23DEDB992C6E3DDB0076B075 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
