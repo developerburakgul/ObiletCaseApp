@@ -11,11 +11,16 @@ import SnapKit
 
 //MARK: - HomeViewControllerInterface
 protocol HomeViewControllerInterface : AnyObject {
+    var isDragging : Bool {get}
     func reloadData()
     func setup()
     func setupNavigationBar()
     func showNoConnection()
     func hideNoConnection()
+    func beginRefreshing()
+    func endRefreshing()
+
+    
 }
 
 
@@ -40,9 +45,13 @@ final class HomeViewController: UIViewController {
     private var noConnectionImageView : UIImageView = {
        let noConnectionImageView = UIImageView()
         noConnectionImageView.image = UIImage(systemName: "wifi.slash")
-        noConnectionImageView.isHidden = false
+        noConnectionImageView.isHidden = true
         noConnectionImageView.tintColor = .systemRed
         return noConnectionImageView
+    }()
+    private var refreshControl : UIRefreshControl = {
+        let refreshControl : UIRefreshControl = UIRefreshControl()
+        return refreshControl
     }()
     
     //MARK: - Init Functions
@@ -82,14 +91,22 @@ final class HomeViewController: UIViewController {
             make.centerX.centerY.equalToSuperview()
             make.width.equalTo(minSize * 0.5)
             make.height.equalTo(noConnectionImageView.snp.width)
-            
-            
         }
     }
     private func setupDelegates()  {
         collectionView.delegate = self
         collectionView.dataSource = self
         searchController.searchBar.delegate = self
+    }
+    
+    func setupRefreshControl() {
+        refreshControl.addTarget(self, action: #selector(pulledDownRefreshControl), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
+        refreshControl.tintColor = .red
+    }
+    
+    @objc private func pulledDownRefreshControl(){
+        viewModel.pulledDownRefreshControl()
     }
 }
 
@@ -129,7 +146,6 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout {
         let itemWidth = availableWidth / 2
         return CGSize(width: itemWidth, height: itemWidth)
     }
-    
 }
 
 
@@ -146,6 +162,10 @@ extension HomeViewController : UISearchBarDelegate {
 
 //MARK: - HomeViewControllerInterface Implementation
 extension HomeViewController : HomeViewControllerInterface {
+    var isDragging: Bool {
+        self.collectionView.isDragging
+    }
+    
     func reloadData() {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
@@ -158,6 +178,7 @@ extension HomeViewController : HomeViewControllerInterface {
         setupNoConnectionImageView()
         collectionView.register(ProductCollectionViewCell.self, forCellWithReuseIdentifier: ProductCollectionViewCell.identifier)
         view.backgroundColor = .systemBackground
+        setupRefreshControl()
     }
     func setupNavigationBar(){
         self.navigationItem.title = "Home Screen"
@@ -173,7 +194,18 @@ extension HomeViewController : HomeViewControllerInterface {
     
     func hideNoConnection() {
         noConnectionImageView.isHidden = true
+        
     }
+    
+    func beginRefreshing() {
+        collectionView.refreshControl?.beginRefreshing()
+    }
+    
+    func endRefreshing() {
+        collectionView.refreshControl?.endRefreshing()
+    }
+    
+
 }
 #Preview(""){
     

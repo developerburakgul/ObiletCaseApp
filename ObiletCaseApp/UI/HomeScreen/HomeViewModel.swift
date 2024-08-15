@@ -14,6 +14,7 @@ protocol HomeViewModelInterface {
     func viewWillAppear()
     func textDidChangeWith(_ searchText : String)
     func searchBarCancelButtonClicked()
+    func pulledDownRefreshControl()
     
 }
 
@@ -25,6 +26,10 @@ final class HomeViewModel {
     private var showProducts : [Product] = []
     
     
+    /// this flag is going to help me because when i pull to refresh , again i can pull to refresh and this creates many operation
+    private var isFetching = false
+    
+    
     var countOfProducts : Int {
         showProducts.count
     }
@@ -34,18 +39,33 @@ final class HomeViewModel {
     }
     
     //MARK: - Public Functions
+
     func fetchProducts() {
-        productService.fetchProducts(path: Endpoint.products) { result in
-            switch result {
-            case .success(let data):
-                self.products = data
-                self.showProducts = data
-                self.view?.hideNoConnection()
-                self.view?.reloadData()
-            case .failure(let error):
-                self.view?.showNoConnection()
+        
+        guard !isFetching else { return } // if there is fetch operation , dont start
+                isFetching = true
+        DispatchQueue.global(qos: .background).async {
+            self.productService.fetchProducts(path: Endpoint.products) { result in
+                self.isFetching = false // Reset the flag when the operation is complete
+                switch result {
+                case .success(let data):
+                    self.products = data
+                    self.showProducts = data
+                    DispatchQueue.main.async {
+                        self.view?.hideNoConnection() // Hide the noConnectionImageView on successful data fetch
+                        self.view?.reloadData() // Reload the collection view with new data
+                    }
+                case .failure(let error):
+                    self.showProducts = []
+                    DispatchQueue.main.async {
+                        self.view?.showNoConnection() // Show noConnectionImageView if data fetch fails
+                        self.view?.reloadData()
+                    }
+                }
             }
         }
+
+
     }
     
     func getProduct(indexPath : IndexPath) -> Product {
@@ -157,6 +177,16 @@ extension HomeViewModel : HomeViewModelInterface {
     func searchBarCancelButtonClicked() {
         showProducts = products
         view?.reloadData()
+    }
+    
+    func pulledDownRefreshControl() {
+        if let isDragging = view?.isDragging {
+            view?.beginRefreshing()
+            if isDragging {
+                fetchProducts()
+                view?.endRefreshing()
+            }
+        }
     }
     
 }
