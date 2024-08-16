@@ -18,7 +18,6 @@
 - There are 2 screens in the project:
   - 1- Home Screen
     - Shows Products
-    - Has a + button to go to Create Screen 
     - Has a search bar to search product with Text
     - Has 4 button to filter product by category
   - 2- Detail Screen
