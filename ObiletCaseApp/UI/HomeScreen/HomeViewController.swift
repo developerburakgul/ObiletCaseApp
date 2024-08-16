@@ -19,12 +19,12 @@ protocol HomeViewControllerInterface : AnyObject {
     func hideNoConnection()
     func beginRefreshing()
     func endRefreshing()
-
-    
 }
 
 
 final class HomeViewController: UIViewController {
+
+    
     
     private var viewModel : HomeViewModel
     
@@ -134,6 +134,20 @@ extension HomeViewController : UICollectionViewDataSource {
         cell.configure(with: viewModel.getProduct(indexPath: indexPath))
         return cell
     }
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard kind == UICollectionView.elementKindSectionHeader else {
+            return UICollectionReusableView()
+        }
+        
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionHeaderView.identifier, for: indexPath) as? CollectionHeaderView else {
+            return UICollectionReusableView()
+        }
+        header.delegate = self
+        
+        
+        return header
+    }
+
 }
 
 //MARK: - UICollectionViewDelegateFlowLayout
@@ -146,6 +160,10 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout {
         let itemWidth = availableWidth / 2
         return CGSize(width: itemWidth, height: itemWidth)
     }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 50)
+    }
+
 }
 
 
@@ -177,6 +195,8 @@ extension HomeViewController : HomeViewControllerInterface {
         setupDelegates()
         setupNoConnectionImageView()
         collectionView.register(ProductCollectionViewCell.self, forCellWithReuseIdentifier: ProductCollectionViewCell.identifier)
+        collectionView.register(CollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CollectionHeaderView.identifier)
+
         view.backgroundColor = .systemBackground
         setupRefreshControl()
     }
@@ -207,6 +227,14 @@ extension HomeViewController : HomeViewControllerInterface {
     
 
 }
+
+
+extension HomeViewController : CategorySelectionDelegate {
+    func didSelectCategory(_ category: Category?) {
+        viewModel.didSelectCategory(category)
+    }
+}
+
 #Preview(""){
     
     UINavigationController(rootViewController: HomeViewController(viewModel: HomeViewModel(productService: ProductService(networkManager: AFNetworkManager()))))

@@ -33,6 +33,8 @@
 		23DEDBA42C6E44070076B075 /* MockProductService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DEDBA32C6E44070076B075 /* MockProductService.swift */; };
 		23DEDBA82C6E515E0076B075 /* Product+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DEDBA72C6E515E0076B075 /* Product+Mock.swift */; };
 		23DEDBAA2C6E525C0076B075 /* Rating+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DEDBA92C6E525C0076B075 /* Rating+Mock.swift */; };
+		23FFAFC22C6F196500BE62E1 /* CollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FFAFC12C6F196500BE62E1 /* CollectionHeaderView.swift */; };
+		23FFAFC42C6F26F100BE62E1 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FFAFC32C6F26F100BE62E1 /* UIButton+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,8 @@
 		23DEDBA32C6E44070076B075 /* MockProductService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProductService.swift; sourceTree = "<group>"; };
 		23DEDBA72C6E515E0076B075 /* Product+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Product+Mock.swift"; sourceTree = "<group>"; };
 		23DEDBA92C6E525C0076B075 /* Rating+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rating+Mock.swift"; sourceTree = "<group>"; };
+		23FFAFC12C6F196500BE62E1 /* CollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHeaderView.swift; sourceTree = "<group>"; };
+		23FFAFC32C6F26F100BE62E1 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +190,7 @@
 				235EA08C2C6A5B3400F80F86 /* HomeViewController.swift */,
 				235EA0B82C6A960300F80F86 /* HomeViewModel.swift */,
 				235EA0BA2C6A9A5300F80F86 /* ProductCollectionViewCell.swift */,
+				23FFAFC12C6F196500BE62E1 /* CollectionHeaderView.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -220,6 +225,7 @@
 			children = (
 				23A9E7502C6D02880098D375 /* Double+Extension.swift */,
 				23A9E7522C6D060D0098D375 /* Int+Extension.swift */,
+				23FFAFC32C6F26F100BE62E1 /* UIButton+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -405,7 +411,9 @@
 				235EA0AF2C6A658500F80F86 /* NetworkUtils.swift in Sources */,
 				23C2B6072C6BAB19007EEF94 /* DetailViewModel.swift in Sources */,
 				235EA0AB2C6A619B00F80F86 /* ProductService.swift in Sources */,
+				23FFAFC42C6F26F100BE62E1 /* UIButton+Extension.swift in Sources */,
 				23A9E7532C6D060D0098D375 /* Int+Extension.swift in Sources */,
+				23FFAFC22C6F196500BE62E1 /* CollectionHeaderView.swift in Sources */,
 				23A9E7512C6D02880098D375 /* Double+Extension.swift in Sources */,
 				23C2B6012C6B69B7007EEF94 /* DetailViewController.swift in Sources */,
 				235EA0BB2C6A9A5300F80F86 /* ProductCollectionViewCell.swift in Sources */,

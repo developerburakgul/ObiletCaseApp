@@ -72,7 +72,7 @@ final class DetailViewController: UIViewController {
         return rateLabel
     }()
     private let countImageView : UIImageView = {
-        let countImageView = UIImageView(image: UIImage(systemName: "cart"))
+        let countImageView = UIImageView(image: UIImage(systemName: "person.fill"))
         countImageView.contentMode = .scaleAspectFit
         //        countImageView.backgroundColor = .systemPink
         return countImageView
@@ -270,6 +270,7 @@ extension DetailViewController : DetailViewControllerInterface {
     func setupNavigationBar() {
         self.navigationItem.title = "Detail Screen"
         self.navigationController?.navigationBar.prefersLargeTitles = false
+        self.navigationController?.navigationBar.tintColor = .label
     }
 }
 
@@ -278,7 +279,7 @@ extension DetailViewController : DetailViewControllerInterface {
 
 
 
-#Preview(""){
-    UINavigationController(rootViewController: DetailViewController(viewModel: DetailViewModel(product: Product(id: 2, title: "Burak is  ", price: 2500.00, description: "This is the description. It can be very long and will require scrolling to see the entire text.",category: "men", image: "https://avatars.githubusercontent.com/u/83167665?s=400&u=09405fb9f0a95b97b27778d163c19eb64bb3e95a&v=4", rating: Rating(rate: 4.7, count: 10)))))
-}
+//#Preview(""){
+//    UINavigationController(rootViewController: DetailViewController(viewModel: DetailViewModel(product: Product(id: 2, title: "Burak is  ", price: 2500.00, description: "This is the description. It can be very long and will require scrolling to see the entire text.",category: Category.electronics , image: "https://avatars.githubusercontent.com/u/83167665?s=400&u=09405fb9f0a95b97b27778d163c19eb64bb3e95a&v=4", rating: Rating(rate: 4.7, count: 10)))))
+//}
 

@@ -19,9 +19,17 @@ struct Product: Codable {
     let title: String
     let price: Double
     let description: String
-    let category: String
+    let category: Category
     let image: String
     let rating: Rating
+}
+
+
+enum Category: String, Codable,CaseIterable {
+    case electronics = "electronics"
+    case jewelery = "jewelery"
+    case menSClothing = "men's clothing"
+    case womenSClothing = "women's clothing"
 }
 
 extension Product : Equatable {

@@ -15,6 +15,7 @@ protocol HomeViewModelInterface {
     func textDidChangeWith(_ searchText : String)
     func searchBarCancelButtonClicked()
     func pulledDownRefreshControl()
+    func didSelectCategory(_ category : Category?)
     
 }
 
@@ -24,6 +25,10 @@ final class HomeViewModel {
     private var products : [Product] = []
     private var categories: [String] = []
     private var showProducts : [Product] = []
+    
+    
+    private var selectedCategory: Category?
+    private var currentSearchText: String = ""
     
     
     /// this flag is going to help me because when i pull to refresh , again i can pull to refresh and this creates many operation
@@ -50,7 +55,7 @@ final class HomeViewModel {
                 switch result {
                 case .success(let data):
                     self.products = data
-                    self.showProducts = data
+                    self.applyFilters()
                     DispatchQueue.main.async {
                         self.view?.hideNoConnection() // Hide the noConnectionImageView on successful data fetch
                         self.view?.reloadData() // Reload the collection view with new data
@@ -72,86 +77,24 @@ final class HomeViewModel {
         showProducts[indexPath.row]
     }
     
-    func fetchCategories() {
-        
-        productService.fetchCategories(path: Endpoint.categories) { result in
-            switch result {
-            case .success(let data):
-                self.categories = data
-            case .failure(let failure):
-                fatalError("errorr")
-            }
+    
+    func applyFilters() {
+        var tempArray = products
+        if let selectedCategory = selectedCategory {
+            tempArray = tempArray.filter({ product in
+                product.category == selectedCategory
+            })
         }
         
+        if !currentSearchText.isEmpty {
+            tempArray = tempArray.filter({ product in
+                product.title.contains(currentSearchText) || product.description.contains(currentSearchText)
+            })
+        }
+        showProducts = tempArray
     }
     
-    func getCategories() -> [String] {
-        return categories
-    }
-    
-    
-    
-    /// Filters the product list based on the search text.
-    /// Category filter requires an exact match, while title and description filters check for keyword containment.
-    /// - Parameter text: User's searchText
-    func filterProductsWith(_ text : String) {
-        // If the search text is empty, show all products
-        if text.isEmpty {
-            showProducts = products
-            return
-        }
-        // Split the search text into keywords for filtering
-        let keywords = text.lowercased().split(separator: " ")
-        
-        var tempProductArray: [Product] = []
-        
-        // Step 1: Filter products by exact match in the category
-        let categoryMatches = products.filter { product in
-            for keyword in keywords {
-                // Check for exact match between product category and keyword
-                if product.category.lowercased() == keyword {
-                    return true
-                }
-            }
-            return false
-        }
-        tempProductArray.append(contentsOf: categoryMatches)
-        
-        // Step 2: Filter products by keyword containment in the title
-        let titleMatches = products.filter { product in
-            // Exclude products that are already matched in the category filter
-            if categoryMatches.contains(where: { $0 == product }) {
-                return false
-            }
-            for keyword in keywords {
-                // Check if the title contains any of the keywords
-                if product.title.lowercased().contains(keyword) {
-                    return true
-                }
-            }
-            return false
-        }
-        tempProductArray.append(contentsOf: titleMatches)
-        
-        // Step 3: Filter products by keyword containment in the description
-        let descriptionMatches = products.filter { product in
-            // Exclude products that are already matched in the category or title filters
-            if categoryMatches.contains(where: { $0 == product }) || titleMatches.contains(where: { $0 == product }) {
-                return false
-            }
-            for keyword in keywords {
-                // Check if the description contains any of the keywords
-                if product.description.lowercased().contains(keyword) {
-                    return true
-                }
-            }
-            return false
-        }
-        tempProductArray.append(contentsOf: descriptionMatches)
-        
-        // Update the showProducts array with the filtered results
-        showProducts = tempProductArray
-    }
+
     
     
 }
@@ -170,7 +113,8 @@ extension HomeViewModel : HomeViewModelInterface {
     }
     
     func textDidChangeWith(_ searchText: String) {
-        self.filterProductsWith(searchText)
+        self.currentSearchText = searchText
+        applyFilters()
         view?.reloadData()
     }
     
@@ -186,6 +130,12 @@ extension HomeViewModel : HomeViewModelInterface {
             self.view?.endRefreshing()
         }
         
+    }
+    
+    func didSelectCategory(_ category: Category?) {
+        selectedCategory = category
+        applyFilters()
+        view?.reloadData()
     }
     
 }
