@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,18 +14,41 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shoppingImage" translatesAutoresizingMaskIntoConstraints="NO" id="3Pg-1U-Th2">
+                                <rect key="frame" x="46.666666666666657" y="276" width="300" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="0ih-nn-sWd"/>
+                                    <constraint firstAttribute="height" constant="300" id="1ZH-Gb-0FV"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Obilet Case App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fkW-IF-3IX">
+                                <rect key="frame" x="46.666666666666657" y="156" width="300" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="L3v-at-g8Z"/>
+                                    <constraint firstAttribute="width" constant="300" id="UZm-D6-AbB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <color key="textColor" red="0.55294117647058827" green="0.25098039215686274" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="3Pg-1U-Th2" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="cBj-mx-QZD"/>
+                            <constraint firstItem="fkW-IF-3IX" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="cf4-hN-doL"/>
+                            <constraint firstItem="3Pg-1U-Th2" firstAttribute="top" secondItem="fkW-IF-3IX" secondAttribute="bottom" constant="20" id="omQ-ua-e9F"/>
+                            <constraint firstItem="3Pg-1U-Th2" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ycR-Oj-cI1"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="141" y="81"/>
+            <point key="canvasLocation" x="-106" y="80"/>
         </scene>
     </scenes>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="shoppingImage" width="341.33334350585938" height="341.33334350585938"/>
     </resources>
 </document>

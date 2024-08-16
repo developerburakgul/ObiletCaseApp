@@ -13,7 +13,7 @@ extension Product {
         title: String = "Mock Product",
         price: Double = 99.99,
         description: String = "This is a mock product description.",
-        category: String = "Mock Category",
+        category: Category = Category.jewelery,
         image: String = "https://example.com/image.jpg",
         rating: Rating = Rating(rate: 4.5, count: 100)
     ) -> Product {

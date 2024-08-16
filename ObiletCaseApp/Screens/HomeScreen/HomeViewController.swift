@@ -11,7 +11,6 @@ import SnapKit
 
 //MARK: - HomeViewControllerInterface
 protocol HomeViewControllerInterface : AnyObject {
-    var collectionViewIsDragging : Bool {get}
     func reloadData()
     func setup()
     func setupNavigationBar()
@@ -23,9 +22,6 @@ protocol HomeViewControllerInterface : AnyObject {
 
 
 final class HomeViewController: UIViewController {
-
-    
-    
     private var viewModel : HomeViewModel
     
     //MARK: - UI Components
@@ -85,7 +81,7 @@ final class HomeViewController: UIViewController {
     }
     
     private func setupNoConnectionImageView(){
-        var minSize = min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
+        let minSize = min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
         view.addSubview(noConnectionImageView)
         noConnectionImageView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
@@ -180,9 +176,6 @@ extension HomeViewController : UISearchBarDelegate {
 
 //MARK: - HomeViewControllerInterface Implementation
 extension HomeViewController : HomeViewControllerInterface {
-    var collectionViewIsDragging: Bool {
-        self.collectionView.isDragging
-    }
     
     func reloadData() {
         DispatchQueue.main.async {

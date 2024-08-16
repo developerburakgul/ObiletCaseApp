@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 extension Double {
     var toInt: Int? {
         if self.truncatingRemainder(dividingBy: 1) == 0 {

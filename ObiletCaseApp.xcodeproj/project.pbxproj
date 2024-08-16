@@ -124,7 +124,7 @@
 				235EA0A02C6A5E9C00F80F86 /* Models */,
 				235EA09F2C6A5E9300F80F86 /* Core */,
 				235EA09C2C6A5DEC00F80F86 /* Delegates */,
-				235EA09E2C6A5E1800F80F86 /* UI */,
+				235EA09E2C6A5E1800F80F86 /* Screens */,
 				235EA0912C6A5B3500F80F86 /* Assets.xcassets */,
 				235EA09D2C6A5E0700F80F86 /* Base */,
 				235EA0962C6A5B3500F80F86 /* Info.plist */,
@@ -149,13 +149,13 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		235EA09E2C6A5E1800F80F86 /* UI */ = {
+		235EA09E2C6A5E1800F80F86 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				235EA0B72C6A955700F80F86 /* HomeScreen */,
 				23C2B5FF2C6B6990007EEF94 /* DetailScreen */,
 			);
-			path = UI;
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		235EA09F2C6A5E9300F80F86 /* Core */ = {
@@ -189,8 +189,7 @@
 			children = (
 				235EA08C2C6A5B3400F80F86 /* HomeViewController.swift */,
 				235EA0B82C6A960300F80F86 /* HomeViewModel.swift */,
-				235EA0BA2C6A9A5300F80F86 /* ProductCollectionViewCell.swift */,
-				23FFAFC12C6F196500BE62E1 /* CollectionHeaderView.swift */,
+				23C97AEA2C6F7E4D007AF032 /* Subviews */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -230,30 +229,48 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		23C97AEA2C6F7E4D007AF032 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				235EA0BA2C6A9A5300F80F86 /* ProductCollectionViewCell.swift */,
+				23FFAFC12C6F196500BE62E1 /* CollectionHeaderView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		23C97AEB2C6F8186007AF032 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				23DEDBA32C6E44070076B075 /* MockProductService.swift */,
+				23DEDB9F2C6E435A0076B075 /* MockHomeViewController.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		23DEDB932C6E3DDB0076B075 /* ObiletCaseAppTests */ = {
 			isa = PBXGroup;
 			children = (
 				23DEDBA52C6E50F50076B075 /* Helper */,
 				23DEDBA12C6E43E70076B075 /* Core */,
-				23DEDB9B2C6E3DF10076B075 /* UI */,
+				23DEDB9B2C6E3DF10076B075 /* Screens */,
 				23DEDB942C6E3DDB0076B075 /* ObiletCaseAppTests.swift */,
 			);
 			path = ObiletCaseAppTests;
 			sourceTree = "<group>";
 		};
-		23DEDB9B2C6E3DF10076B075 /* UI */ = {
+		23DEDB9B2C6E3DF10076B075 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				23DEDB9C2C6E3DFD0076B075 /* HomeScreen */,
 			);
-			path = UI;
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		23DEDB9C2C6E3DFD0076B075 /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
 				23DEDB9D2C6E3E4B0076B075 /* HomeViewModelTests.swift */,
-				23DEDB9F2C6E435A0076B075 /* MockHomeViewController.swift */,
+				23C97AEB2C6F8186007AF032 /* Mocks */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -269,7 +286,6 @@
 		23DEDBA22C6E43EE0076B075 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				23DEDBA32C6E44070076B075 /* MockProductService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";

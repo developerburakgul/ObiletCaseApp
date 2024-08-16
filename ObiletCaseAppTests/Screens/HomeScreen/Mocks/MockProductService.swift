@@ -21,16 +21,4 @@ final class MockProductService: ProductServicing {
                 }
     }
     
-    var invokedFetchCategories = false
-        var invokedFetchCategoriesCount = 0
-    var fetchCategoriesResult: Result<[String], Error>?
-    func fetchCategories(path: ObiletCaseApp.NetworkPath, completion: @escaping (Result<[String], Error>) -> ()) {
-        invokedFetchCategories = true
-        invokedFetchCategoriesCount += 1
-        if let result = fetchCategoriesResult {
-            completion(result)
-        }
-    }
-    
-    
 }

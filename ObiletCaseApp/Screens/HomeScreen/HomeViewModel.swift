@@ -22,8 +22,7 @@ protocol HomeViewModelInterface {
 final class HomeViewModel {
     weak var view : HomeViewControllerInterface?
     private let productService : ProductServicing
-    private var products : [Product] = []
-    private var categories: [String] = []
+    private(set) var products : [Product] = []
     private var showProducts : [Product] = []
     
     
