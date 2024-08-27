@@ -7,7 +7,7 @@
 
 @testable import ObiletCaseApp
 
-final class MockProductService: ProductServicing {
+final class MockProductService: ProductServiceInterface {
     
     var invokedFetchProducts = false
     var invokedFetchProductsCount = 0

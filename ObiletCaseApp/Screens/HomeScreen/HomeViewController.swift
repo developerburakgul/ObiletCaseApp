@@ -10,7 +10,7 @@ import SnapKit
 
 
 //MARK: - HomeViewControllerInterface
-protocol HomeViewControllerInterface : AnyObject {
+protocol HomeViewControllerInterface: AnyObject {
     func reloadData()
     func setup()
     func setupNavigationBar()
@@ -22,7 +22,7 @@ protocol HomeViewControllerInterface : AnyObject {
 
 
 final class HomeViewController: UIViewController {
-    private var viewModel : HomeViewModel
+    private var viewModel : HomeViewModelInterface
     
     //MARK: - UI Components
     private var collectionView : UICollectionView = {
@@ -51,7 +51,7 @@ final class HomeViewController: UIViewController {
     }()
     
     //MARK: - Init Functions
-    init(viewModel : HomeViewModel) {
+    init(viewModel : HomeViewModelInterface) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         self.viewModel.view = self
@@ -119,7 +119,7 @@ extension HomeViewController : UICollectionViewDelegate {
 //MARK: - UICollectionViewDataSource
 extension HomeViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.countOfProducts
+        viewModel.countOfProduct
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -223,6 +223,10 @@ extension HomeViewController : HomeViewControllerInterface {
 
 
 extension HomeViewController : CategorySelectionDelegate {
+    func didUnSelectCategory(_ category: Category?) {
+        viewModel.didUnSelectCategory(category)
+    }
+    
     func didSelectCategory(_ category: Category?) {
         viewModel.didSelectCategory(category)
     }

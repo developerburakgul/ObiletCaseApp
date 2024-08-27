@@ -25,7 +25,7 @@ struct Product: Codable {
 }
 
 
-enum Category: String, Codable,CaseIterable {
+enum Category: String, Codable, CaseIterable {
     case electronics = "electronics"
     case jewelery = "jewelery"
     case menSClothing = "men's clothing"
@@ -33,8 +33,8 @@ enum Category: String, Codable,CaseIterable {
 }
 
 
-extension Product : Equatable {
+extension Product: Equatable {
     static func ==(lhs: Product, rhs: Product) -> Bool {
-            return lhs.id == rhs.id
+            lhs.id == rhs.id
         }
 }

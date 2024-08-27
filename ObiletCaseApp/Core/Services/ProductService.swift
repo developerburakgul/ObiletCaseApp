@@ -8,13 +8,11 @@
 import Foundation
 
 
-protocol ProductServicing {
-    func fetchProducts(path : NetworkPath,completion : @escaping (Result<[Product],Error>)->())
+protocol ProductServiceInterface {
+    func fetchProducts(path:NetworkPath,completion: @escaping (Result<[Product],Error>) -> ())
 }
 
-class ProductService  : ProductServicing {
-
-    
+final class ProductService  : ProductServiceInterface {
     //MARK: - Private Attribute
     private let networkManager : NetworkManaging
     
@@ -23,7 +21,7 @@ class ProductService  : ProductServicing {
         self.networkManager = networkManager
     }
     
-    func fetchProducts(path : NetworkPath,completion : @escaping (Result<[Product],Error>)->()) {
+    func fetchProducts(path : NetworkPath,completion : @escaping (Result<[Product],Error>) -> ()) {
         networkManager.request(path, decodeToType: [Product].self, method: .get) { result in
             completion(result)
         }

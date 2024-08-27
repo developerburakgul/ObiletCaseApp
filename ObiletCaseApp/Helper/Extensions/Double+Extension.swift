@@ -9,14 +9,10 @@ import Foundation
 
 extension Double {
     var toInt: Int? {
-        if self.truncatingRemainder(dividingBy: 1) == 0 {
-            return Int(self)
-        } else {
-            return nil
-        }
+        truncatingRemainder(dividingBy: 1) == .zero ? Int(self): nil
     }
     
     var toString : String {
-        return String(self)
+        String(self)
     }
 }

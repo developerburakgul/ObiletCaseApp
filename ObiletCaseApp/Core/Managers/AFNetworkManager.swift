@@ -10,7 +10,6 @@ import Alamofire
 
 //MARK: - Protocol
 protocol NetworkManaging {
-    
     func request<T: Codable>(_ path: NetworkPath,
                              decodeToType type: T.Type,
                              method : NetworkType,
@@ -18,7 +17,6 @@ protocol NetworkManaging {
 }
 
 //MARK: - Class
-
 class AFNetworkManager : NetworkManaging   {
     
     /// Fetch all request

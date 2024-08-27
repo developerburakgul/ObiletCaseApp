@@ -9,6 +9,7 @@ import Foundation
 
 //MARK: - DetailViewModelInterface
 protocol DetailViewModelInterface {
+    var view : DetailViewControllerInterface? { get set }
     func viewDidLoad()
     func viewWillAppear()
     func updateView()
@@ -25,6 +26,7 @@ final class DetailViewModel {
 
 //MARK: -  DetailViewModelInterface Implementation
 extension DetailViewModel : DetailViewModelInterface {
+    
     func viewDidLoad() {
         view?.setup()
         updateView()
@@ -37,6 +39,4 @@ extension DetailViewModel : DetailViewModelInterface {
     func updateView() {
         view?.updateViewWith(product)
     }
-    
-    
 }

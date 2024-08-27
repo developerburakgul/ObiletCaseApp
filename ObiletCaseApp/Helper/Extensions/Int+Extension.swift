@@ -7,9 +7,8 @@
 
 import Foundation
 
-
 extension Int {
-    var toString : String {
+    var toString: String {
         String(self)
     }
 }

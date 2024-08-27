@@ -5,11 +5,9 @@
 //  Created by Burak Gül on 16.08.2024.
 //
 
-import Foundation
 import UIKit
 
 extension UIButton {
-    
     static func createCategoryButton(withTitle title: String) -> UIButton {
         let button = UIButton(type: .system)
         button.setTitle(title, for: .normal)

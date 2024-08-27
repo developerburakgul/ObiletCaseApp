@@ -27,6 +27,10 @@
 		23C2B5FE2C6B4FAF007EEF94 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 23C2B5FD2C6B4FAF007EEF94 /* Kingfisher */; };
 		23C2B6012C6B69B7007EEF94 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2B6002C6B69B7007EEF94 /* DetailViewController.swift */; };
 		23C2B6072C6BAB19007EEF94 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C2B6062C6BAB19007EEF94 /* DetailViewModel.swift */; };
+		23C36CB42C7491160030645E /* DetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C36CB32C7491160030645E /* DetailViewModelTests.swift */; };
+		23C36CB72C7494ED0030645E /* MockDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C36CB62C7494ED0030645E /* MockDetailViewController.swift */; };
+		23C36CB92C7498F70030645E /* ProductServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C36CB82C7498F70030645E /* ProductServiceTests.swift */; };
+		23C36CBC2C7499B40030645E /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C36CBB2C7499B40030645E /* MockNetworkManager.swift */; };
 		23DEDB952C6E3DDB0076B075 /* ObiletCaseAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DEDB942C6E3DDB0076B075 /* ObiletCaseAppTests.swift */; };
 		23DEDB9E2C6E3E4B0076B075 /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DEDB9D2C6E3E4B0076B075 /* HomeViewModelTests.swift */; };
 		23DEDBA02C6E435A0076B075 /* MockHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DEDB9F2C6E435A0076B075 /* MockHomeViewController.swift */; };
@@ -65,6 +69,10 @@
 		23A9E7522C6D060D0098D375 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		23C2B6002C6B69B7007EEF94 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		23C2B6062C6BAB19007EEF94 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		23C36CB32C7491160030645E /* DetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModelTests.swift; sourceTree = "<group>"; };
+		23C36CB62C7494ED0030645E /* MockDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailViewController.swift; sourceTree = "<group>"; };
+		23C36CB82C7498F70030645E /* ProductServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProductServiceTests.swift; path = ObiletCaseAppTests/Screens/DetailScreen/Mocks/ProductServiceTests.swift; sourceTree = SOURCE_ROOT; };
+		23C36CBB2C7499B40030645E /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockNetworkManager.swift; path = Services/Mocks/MockNetworkManager.swift; sourceTree = SOURCE_ROOT; };
 		23DEDB922C6E3DDB0076B075 /* ObiletCaseAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ObiletCaseAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		23DEDB942C6E3DDB0076B075 /* ObiletCaseAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObiletCaseAppTests.swift; sourceTree = "<group>"; };
 		23DEDB9D2C6E3E4B0076B075 /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
@@ -161,8 +169,8 @@
 		235EA09F2C6A5E9300F80F86 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				23A9E74F2C6C90E50098D375 /* Services */,
 				235EA0A82C6A612700F80F86 /* Managers */,
+				23A9E74F2C6C90E50098D375 /* Services */,
 				235EA0AE2C6A658500F80F86 /* NetworkUtils.swift */,
 			);
 			path = Core;
@@ -229,6 +237,31 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		23C36CB22C7490F60030645E /* DetailScreen */ = {
+			isa = PBXGroup;
+			children = (
+				23C36CB32C7491160030645E /* DetailViewModelTests.swift */,
+				23C36CB52C7494D70030645E /* Mocks */,
+			);
+			path = DetailScreen;
+			sourceTree = "<group>";
+		};
+		23C36CB52C7494D70030645E /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				23C36CB62C7494ED0030645E /* MockDetailViewController.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		23C36CBA2C74998F0030645E /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				23C36CBB2C7499B40030645E /* MockNetworkManager.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		23C97AEA2C6F7E4D007AF032 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				23DEDB9C2C6E3DFD0076B075 /* HomeScreen */,
+				23C36CB22C7490F60030645E /* DetailScreen */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -286,6 +320,8 @@
 		23DEDBA22C6E43EE0076B075 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				23C36CB82C7498F70030645E /* ProductServiceTests.swift */,
+				23C36CBA2C74998F0030645E /* Mocks */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -444,7 +480,11 @@
 				23DEDBA82C6E515E0076B075 /* Product+Mock.swift in Sources */,
 				23DEDBA02C6E435A0076B075 /* MockHomeViewController.swift in Sources */,
 				23DEDBAA2C6E525C0076B075 /* Rating+Mock.swift in Sources */,
+				23C36CB92C7498F70030645E /* ProductServiceTests.swift in Sources */,
+				23C36CBC2C7499B40030645E /* MockNetworkManager.swift in Sources */,
+				23C36CB42C7491160030645E /* DetailViewModelTests.swift in Sources */,
 				23DEDB952C6E3DDB0076B075 /* ObiletCaseAppTests.swift in Sources */,
+				23C36CB72C7494ED0030645E /* MockDetailViewController.swift in Sources */,
 				23DEDB9E2C6E3E4B0076B075 /* HomeViewModelTests.swift in Sources */,
 				23DEDBA42C6E44070076B075 /* MockProductService.swift in Sources */,
 			);

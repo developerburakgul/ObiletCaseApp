@@ -14,25 +14,19 @@ protocol NetworkPath {
 }
 
 enum Endpoint : NetworkPath{
-    
-    
     private var baseURL : String { "https://fakestoreapi.com" }
-    
     
     case products
     case categories
     
-     var urlString : String {
-         
-         var endPoint : String
-         switch self {
-             
-         case .products:
-             endPoint = "/products"
-         case .categories:
-             endPoint = "/products/categories"
-         }
-         return baseURL + endPoint
+    var urlString : String {
+        let path = switch self {
+        case .products:
+            "/products"
+        case .categories:
+            "/products/categories"
+        }
+        return baseURL + path
     }
     
 }

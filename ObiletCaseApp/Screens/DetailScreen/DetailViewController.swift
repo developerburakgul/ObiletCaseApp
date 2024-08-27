@@ -8,30 +8,30 @@
 import UIKit
 
 //MARK: - DetailViewControllerInterface
-protocol DetailViewControllerInterface : AnyObject{
+protocol DetailViewControllerInterface: AnyObject{
     func setup()
-    func updateViewWith(_ product : Product)
+    func updateViewWith(_ product: Product)
     func setupNavigationBar()
 }
 
 final class DetailViewController: UIViewController {
     
-    private let viewModel : DetailViewModel
+    private var viewModel: DetailViewModelInterface
     
     //MARK: - UI Components
-    private let scrollView : UIScrollView = {
+    private let scrollView: UIScrollView = {
         let scrollView : UIScrollView = UIScrollView()
         //        scrollView.backgroundColor = .cyan
         scrollView.backgroundColor = .systemBackground
         return scrollView
     }()
-    private let contentView : UIView = {
-        let contentView : UIView = UIView()
+    private let contentView: UIView = {
+        let contentView: UIView = UIView()
         //        contentView.backgroundColor = .yellow
         contentView.backgroundColor = .systemBackground
         return contentView
     }()
-    private var imageView : UIImageView = {
+    private var imageView: UIImageView = {
         let imageview = UIImageView()
         imageview.image = UIImage(systemName: "star")
         //        imageview.backgroundColor = .red
@@ -39,7 +39,7 @@ final class DetailViewController: UIViewController {
         imageview.contentMode = .scaleAspectFit
         return imageview
     }()
-    private var titleLabel : UILabel = {
+    private var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "Title"
         titleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
@@ -48,7 +48,7 @@ final class DetailViewController: UIViewController {
         titleLabel.numberOfLines = 0
         return titleLabel
     }()
-    private var descriptionLabel : UILabel = {
+    private var descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
         descriptionLabel.text = "Description"
         descriptionLabel.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -57,41 +57,41 @@ final class DetailViewController: UIViewController {
         descriptionLabel.numberOfLines = 0
         return descriptionLabel
     }()
-    private let starImageView : UIImageView = {
+    private let starImageView: UIImageView = {
         let starImageView = UIImageView(image: UIImage(systemName: "star.fill"))
         starImageView.contentMode = .scaleAspectFit
         //        starImageView.backgroundColor = .lightGray
         starImageView.tintColor = .systemYellow
         return starImageView
     }()
-    private let rateLabel : UILabel = {
+    private let rateLabel: UILabel = {
         let rateLabel = UILabel()
         rateLabel.text = "4.7"
         rateLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         //        rateLabel.backgroundColor = .red
         return rateLabel
     }()
-    private let countImageView : UIImageView = {
+    private let countImageView: UIImageView = {
         let countImageView = UIImageView(image: UIImage(systemName: "person.fill"))
         countImageView.contentMode = .scaleAspectFit
         //        countImageView.backgroundColor = .systemPink
         return countImageView
     }()
-    private let countLabel : UILabel = {
+    private let countLabel: UILabel = {
         let countLabel = UILabel()
         countLabel.text = "50"
         countLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         //        countLabel.backgroundColor = .gray
         return countLabel
     }()
-    private let priceImageView : UIImageView = {
+    private let priceImageView: UIImageView = {
         let priceImageView = UIImageView(image: UIImage(systemName: "dollarsign.circle.fill"))
         priceImageView.contentMode = .scaleAspectFit
         //        priceImageView.backgroundColor = .red
         priceImageView.tintColor = .systemGreen
         return priceImageView
     }()
-    private let priceLabel : UILabel = {
+    private let priceLabel: UILabel = {
         let priceLabel = UILabel()
         priceLabel.text = "50"
         priceLabel.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -100,7 +100,7 @@ final class DetailViewController: UIViewController {
     }()
     
     //MARK: - Init Functions
-    init(viewModel: DetailViewModel) {
+    init(viewModel: DetailViewModelInterface) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         self.viewModel.view = self

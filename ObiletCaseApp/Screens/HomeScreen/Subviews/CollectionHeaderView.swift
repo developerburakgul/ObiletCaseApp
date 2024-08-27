@@ -10,12 +10,14 @@ import UIKit
 
 protocol CategorySelectionDelegate : AnyObject {
     func didSelectCategory(_ category: Category?)
+    func didUnSelectCategory(_ category: Category?)
+    
 }
 
 final class CollectionHeaderView: UICollectionReusableView {
     static let identifier = "CollectionHeaderView"
     
-    weak var delegate : CategorySelectionDelegate?
+    weak var delegate: CategorySelectionDelegate?
     private var categoryButtons: [UIButton] = []
     private var selectedButton: UIButton?
     private lazy var stackView : UIStackView = {
@@ -58,12 +60,14 @@ final class CollectionHeaderView: UICollectionReusableView {
         }
     }
     
-    @objc private func categoryButtonTapped(_ sender: UIButton) {
-        if let selectedButton = selectedButton, selectedButton == sender {
-            deselectButton(selectedButton)
-        } else {
+    @objc private func categoryButtonTapped(_ sender: UIButton) {        
+        
+        if selectedButton != sender {
             deselectButton(selectedButton)
             selectButton(sender)
+        }else {
+            deselectButton(sender)
+            
         }
     }
     
@@ -79,7 +83,11 @@ final class CollectionHeaderView: UICollectionReusableView {
     private func deselectButton(_ button: UIButton?) {
         button?.backgroundColor = .clear
         selectedButton = nil
-        delegate?.didSelectCategory(nil)
+    
+        if let title = button?.titleLabel?.text, let category = Category(rawValue: title) {
+            delegate?.didUnSelectCategory(category)
+        }
+        
     }
 
     

@@ -129,14 +129,7 @@ final class ProductCollectionViewCell: UICollectionViewCell {
                 .transition(.fade(0.2)),
                 .scaleFactor(UIScreen.main.scale),
                 .cacheOriginalImage
-            ]) { result in
-                switch result {
-                case .success(let value):
-                    return
-                case .failure(let error):
-                    print("Error setting image: \(error.localizedDescription)")
-                }
-            }
+            ])
         
     }
     
